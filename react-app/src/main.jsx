@@ -8,12 +8,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-// ReactDOM.createRoot(document.getElementById('root')).render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-// )
-
 const router = createBrowserRouter([
   {
     path: "/admin",

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-
+import Nav from './components/nav';
 function App() {
   const [count, setCount] = useState(0)
 
@@ -10,22 +10,8 @@ function App() {
     <>
        <div>
       
-            <ul className="menu">
-              <li>
-                <a href={`/admin`}>Backend</a>
-              </li>
-              <li>
-                <a href={`/`}>Frontend</a>
-              </li>
-            </ul>
-            <h1>#1 WINDOW REPLACEMENT SUPPLIER</h1>
-            {/* <div class="wcf-product-steps">
-              <ul>
-                <li> 01 </li>
-                <li> 02 </li>
-                <li> 02 </li>
-              </ul>
-            </div> */}
+           <Nav />
+            <h1>#1 WINDOW REPLACEMENT SUPPLIER</h1>            
             <div className="layout">
               <div className="sidebar-column"> 
                 <h4> YOUR CONFIGURATION </h4>
