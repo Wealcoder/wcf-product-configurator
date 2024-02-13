@@ -102,6 +102,7 @@ button:focus-visible {
   border: 1px solid #e1e1e1;
   border-radius: 5px;
   padding: 15px;
+  width: 1200px;
 }
 .product-nav-button,
 .wcf-product-steps{
@@ -144,26 +145,77 @@ button:focus-visible {
   margin-top: 20px;
   padding-top: 20px;
 }
+.wcf-pml-header{
+  margin-bottom: 30px ;
+}
+.wcf-pml-content-area{
 
-.wcf-product-samples{
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  justify-content: right;
+  gap: 30px;
+
 }
 .wcf-product-samples input:checked ~ .wcf-product-samples .column-items {
   background-color: #2196F3;
 }
-.wcf-product-samples > div{ 
-  border: 1px solid #e1e1e1;
-  border-radius: 5px;
+.wcf-bck-header {
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e1e1e1;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 50px;
+  justify-content: left;
+  align-items: center;
 }
-
-/* .wcf-product-samples input{
-  display: none;
-} */
-
+.wcf-product-samples ul.tree-main {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  flex-wrap: wrap;
+}
+.wcf-product-samples ul.tree-main li{
+  border: 1px solid #e1e1e1;
+  padding: 20px;
+  background: aliceblue;
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.wcf-admin-product-render-area{
+ min-height: 450px;
+}
 .wcf-product-samples img {
   max-width: 230px;
+}
+
+.wcf-thumbarae{
+  position: relative;
+}
+
+.wcf-node-actions {
+    left      : 50%;
+    top       : 50%;
+    position  : absolute; 
+    top       : 50%;
+    transform : translate(-50%,-50%);
+    transform : translate3d(-50%,-50%,0);
+    opacity   : 0;
+    visibility: hidden;
+    transition: all 0.8s;
+    display   : flex;
+    gap       : 20px;
+    flex-direction: column;
+}
+
+.wcf-thumbarae:hover .wcf-node-actions{
+  opacity: 1;
+  visibility: visible;
+  left     : 50%;
 }
 
 .menu{
@@ -175,4 +227,23 @@ button:focus-visible {
   margin: 0;
   padding: 0;
   justify-content: center;
+}
+
+/* */
+
+.wcf-node-form-area{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-right: 30px;
+  margin-top: 30px;
+}
+
+.wcf-node-form-area input{
+  height: 17px;
+  padding: 6px;
+  border: 0;
+  border-bottom: 1px solid #e1e1e1;
+  width: 100%;
 }

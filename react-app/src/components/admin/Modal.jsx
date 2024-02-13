@@ -17,7 +17,7 @@ const styles = {
     position: 'relative',
     width: '80%',
     maxWidth: 'max-content',
-    minWidth: '400px',
+    minWidth: '800px',
     textAlign: 'left'
   },
   closeButton: {

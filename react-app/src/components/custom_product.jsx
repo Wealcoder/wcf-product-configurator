@@ -59,8 +59,7 @@ export class Wcf_Custom_Product {
     } else {
       try {
         // find the target node:
-        targetNode = this.find(targetKey);
-
+        targetNode = this.find(targetKey);       
         // pick the parent:
         const parent = targetNode.parent;
         // initialize a new array for new children array
@@ -76,7 +75,7 @@ export class Wcf_Custom_Product {
         parent.children = updatedChildren;
         // exit:
         return targetNode;
-      } catch (err) {
+      } catch (err) {       
         console.error(
           `Error on remove() method: Node with given targetKey: "${targetKey}" is not found in the Product.`
         );
@@ -96,6 +95,7 @@ export class Wcf_Custom_Product {
       return this.depthFirstSearch(targetKey, this.root);
     }
   }
+  
 
   // using recursive Pre-order traversal with early exit (break) when it is found
   depthFirstSearch(targetKey, node = this.root) {
@@ -133,7 +133,7 @@ export class Wcf_Custom_Product {
     }
   }
 
-  getProductData() {
+  getProductData() {       
     return this.root;
   }
   

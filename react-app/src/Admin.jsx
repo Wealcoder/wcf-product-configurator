@@ -1,35 +1,16 @@
 
 import './App.css'
 import './assets/css/admin.css'
-import React, { useState } from 'react';
-import {AddNewsnapshot, BearCounter, BearControls} from './components/admin/counter';
 import Nav from './components/nav';
-import useSettingsStore from './store/settings';
-import { useEffect } from 'react';
 import Modal from './components/admin/Modal';
-import useModal from './hooks/modal';
 import { ProductRender } from './views/product';
-
+import useSettingsStore from './store/settings';
 function Admin() {
-  const [ModalOpen, setModalOpen , Heading, setHeading, Content , setContent] = useModal(false);
-  const fetch = useSettingsStore((state) => state.fetch);
-  
-  useEffect(() => {
-      fetch({url:'https://jsonplaceholder.typicode.com/todos/1'});
-  });
- 
-  const addnew = function(){
-    setHeading('Add Product Snapshot');
-    setContent(<BearCounter />);
-    setModalOpen(true)
-  }
-  
-  const addnewslice = function(){
-    setHeading('Add Product Slice');
-    setContent(<><BearCounter /><BearControls /></>);
-    setModalOpen(true)
-  }
-  
+  const active_modal        = useSettingsStore((state) => state.active_modal);   
+  const CloseModal          = useSettingsStore((state) => state.CloseModal);   
+  const Heading             = useSettingsStore((state) => state.ModalHeading);   
+  const Content             = useSettingsStore((state) => state.ModalContent);   
+
   return (
     <>
        <div>  
@@ -37,16 +18,14 @@ function Admin() {
             <h1>Backend</h1>           
             <div className="layout backend">
               <div className="body-content"> 
-                <div className="wcf-product-samples">   
-                    <ProductRender />                
-                </div>  
-                <AddNewsnapshot open={addnew} title="Add New+"/>                        
-                <AddNewsnapshot open={addnewslice} title="Add NewSlice+"/>  
+                <div className="wcf-product-samples">  
+                     <ProductRender />                                   
+                 </div>               
               </div>
             </div> 
             { /* Global Modal */ }
-            {ModalOpen && (
-              <Modal onClose={() => setModalOpen(false)}>
+            {active_modal == 1 && (
+              <Modal onClose={() => CloseModal(false)}>
                 <div className='wcf-pml-header'>
                    <h2 className="wcf-modal-heading">{Heading}</h2>
                 </div>
