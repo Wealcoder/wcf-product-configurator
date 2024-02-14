@@ -1,17 +1,49 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useSettingsStore from "../store/settings";
 
-function AddOrUpdateNode(){ 
+function UpdateNode({pkey}){
+
+  const snapshots_nodes = useSettingsStore((state) => state.snapshots_nodes);  
+  let nameRef = useRef();
+  let urlRef = useRef();
+  let updateable_data = {};
+  if(pkey !=undefined){
+    updateable_data = snapshots_nodes.find(pkey);   
+    console.log( updateable_data.data.name );
+    //nameRef.current.value = updateable_data.data.name;
+   // urlRef.current.value = updateable_data.data.url;
+  }
+  const updatedChildren = () => {    
+    updateable_data.data.name = nameRef.current.value;
+    updateable_data.data.url = urlRef.current.value;
+  }
+
+  return <>   
+    <div className="wcf-node-form-area">
+      <div className="item">
+        <input ref={nameRef} onChange={(event) => {
+          nameRef.current.value = event.target.value;
+        }} type="text" placeholder="Write Frame Title"/>        
+      </div>
+      <div className="item">
+        <input onChange={(event) => {
+            updateable_data.data.url = event.target.value;
+        }} type="text" ref={urlRef} placeholder="Provide Frame Url"/>       
+      </div>
+    </div>
+    <div><button onClick={() => updatedChildren()}>Update</button></div>
+  </>
+}
+function AddOrPushNode(){ 
   const current_lavel     = useSettingsStore((state) => state.current_lavel);
-  const addNewProductnode     = useSettingsStore((state) => state.addNewProductNode);
+  const addNewProductnode = useSettingsStore((state) => state.addNewProductNode);
+ 
   const [title, setTitle] = useState('');
-  const [url, setUrl]     = useState('');
-  const updatedChildren = (value) => {
-    
+  const [url, setUrl]     = useState('');  
+  const updatedChildren = (value) => {    
     if(title.length > 3 && url.length > 8){      
       addNewProductnode(value,{name:title,url})
-    }
-     
+    }     
   }
   
   return <>   
@@ -57,7 +89,7 @@ export function AddMoreNode({data}){
   
   const goForInnerElement = function(value){
     setModalHeading('ADD More frame here');
-    setModalContent(<AddOrUpdateNode/>);
+    setModalContent(<AddOrPushNode/>);
     ActivateModal(true)
     setCurrentLavel(value)
   }
@@ -82,10 +114,17 @@ function Openformore({settings}){
 }
 
 function Edit({settings}){
-  const goforinnerelement = function(current){
-    console.log(settings.key);
+      
+  const ActivateModal       = useSettingsStore((state) => state.ActivateModal); 
+  const setModalContent     = useSettingsStore((state) => state.setModalContent); 
+  const setModalHeading     = useSettingsStore((state) => state.setModalHeading);
+
+  const editHandler = function(current){    
+    setModalHeading('Edit');
+    setModalContent(<UpdateNode pkey={current} />);
+    ActivateModal(true)   
   }
-  return <button className="wcf-edit-current-node" onClick={goforinnerelement}>Edit</button>
+  return <button className="wcf-edit-current-node" onClick={() => editHandler(settings.key)}>Edit</button>
 }
 function RemoveButton({confirmhandler,closehandler}){   
   return <>

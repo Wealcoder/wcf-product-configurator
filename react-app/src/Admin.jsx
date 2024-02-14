@@ -6,6 +6,7 @@ import Modal from './components/admin/Modal';
 import { ProductRender } from './views/product';
 import useSettingsStore from './store/settings';
 function Admin() {
+  const update_at        = useSettingsStore((state) => state.update);   
   const active_modal        = useSettingsStore((state) => state.active_modal);   
   const CloseModal          = useSettingsStore((state) => state.CloseModal);   
   const Heading             = useSettingsStore((state) => state.ModalHeading);   
@@ -19,7 +20,7 @@ function Admin() {
             <div className="layout backend">
               <div className="body-content"> 
                 <div className="wcf-product-samples">  
-                     <ProductRender />                                   
+                     <ProductRender update_at={update_at}/>                                   
                  </div>               
               </div>
             </div> 
@@ -34,6 +35,7 @@ function Admin() {
                 </div>                      
               </Modal>
             )}
+            
         </div>
     </>
   )

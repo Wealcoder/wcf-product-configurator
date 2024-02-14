@@ -15,62 +15,62 @@ const nums = [
               name: 'Parent'
           }
       },
-      {
-          id: 3,
-          parentId: 1,
-          data: {
-              name: 'shot 3'
-          }
-      },
-      {
-        id: 33,
-        parentId: 1,
-        data: {
-            name: 'shot 3- 4'
-        }
-      },
-      {
-        id: 34,
-        parentId: 1,
-        data: {
-            name: 'shot 3- 34'
-        }
-      },
-      {
-        id: 35,
-        parentId: 1,
-        data: {
-            name: 'shot 3- 35'
-        }
-      },
-      {
-          id: 2,
-          parentId: 1,
-          data: {
-              name: 'shot 2'
-          }
-      },
-          {
-          id: 4,
-          parentId: 1,
-          data: {
-              name: 'shot 4'
-          }
-      },
-          {
-          id: 5,
-          parentId: 3,
-          data: {
-              name: 'shot 5'
-          }
-      },
-      {
-          id: 6,
-          parentId: 3,
-          data: {
-              name: 'shot 6'
-          }
-      },
+    //   {
+    //       id: 3,
+    //       parentId: 1,
+    //       data: {
+    //           name: 'shot 3'
+    //       }
+    //   },
+    //   {
+    //     id: 33,
+    //     parentId: 1,
+    //     data: {
+    //         name: 'shot 3- 4'
+    //     }
+    //   },
+    //   {
+    //     id: 34,
+    //     parentId: 1,
+    //     data: {
+    //         name: 'shot 3- 34'
+    //     }
+    //   },
+    //   {
+    //     id: 35,
+    //     parentId: 1,
+    //     data: {
+    //         name: 'shot 3- 35'
+    //     }
+    //   },
+    //   {
+    //       id: 2,
+    //       parentId: 1,
+    //       data: {
+    //           name: 'shot 2'
+    //       }
+    //   },
+    //       {
+    //       id: 4,
+    //       parentId: 1,
+    //       data: {
+    //           name: 'shot 4'
+    //       }
+    //   },
+    //       {
+    //       id: 5,
+    //       parentId: 3,
+    //       data: {
+    //           name: 'shot 5'
+    //       }
+    //   },
+    //   {
+    //       id: 6,
+    //       parentId: 3,
+    //       data: {
+    //           name: 'shot 6'
+    //       }
+    //   },
       
   ]
     
@@ -86,7 +86,8 @@ export const createProductSlice = (set,get) => ({
                 // Initialize
                 const tree = new Wcf_Custom_Product();                 
                   // Add the elements
-                nums.forEach(num => tree.add(num.id, num.data, num.parentId))
+                nums.forEach(num => tree.add(num.id, num.data, num.parentId));               
+               
                 set({ snapshots_nodes: tree.full() })
               set({ api_update: 1 })
            },1000);        
@@ -98,16 +99,24 @@ export const createProductSlice = (set,get) => ({
         temp.add(uniqueId(),data,parentKey);  
         set({ snapshots_nodes: temp.full() });
         set( function(){
-                return { 
-                 active_modal: 0,
-               }
+            return { 
+             active_modal: 0,
+            }
         });
-    },      
+    }, 
+    
     removeProductNode: function(parentKey){
          let temp = get().snapshots_nodes;        
          temp.remove(parentKey);          
          set({ snapshots_nodes: temp.full() });  
       
-    }
+    },
+    
+    UpdateProductNode: function(pKey,value){
+        let temp = get().snapshots_nodes;       
+        temp.update( pKey , value );          
+        set({ snapshots_nodes: temp.full() });        
+        set({ update: new Date() });        
+   }
 
 })

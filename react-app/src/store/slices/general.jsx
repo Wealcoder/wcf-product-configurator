@@ -1,23 +1,30 @@
 import { uniqueId } from "../../components/utils";
+
 const initialState = { api_update      : 0,
-  nested         : { current_lavel: 0 },
-  current_lavel  : 0,
-  depth          : 0,
-  active_modal   : 0,
-  ModalHeading   : '',
-  ModalContent   : '',
+  nested       : { current_lavel: 0 },
+  update       : new Date(),
+  current_lavel: 0,
+  depth        : 0,
+  active_modal : 0,
+  ModalHeading : '',
+  ModalContent : '',
 }
-export const createGeneralSlice = (set) => ({   
-    ...initialState,
-    reset    : () => set({ snapshots_nodes: {} }),     
+
+export const createGeneralSlice = (set) => ({
+
+    ...initialState,    
+    reset    : () => set({ snapshots_nodes: {} }),  
+    
     down_item: function(){
       set( function(state){          
           return { 
               nested: { ...state.nested, current_lavel: state.nested.current_lavel - 1 },
           }
       });
-    },    
+    },   
+    
     nested_settings: function(){
+    
      set( function(state){
             // Nested tree settings 
             // write composite pattern
@@ -28,14 +35,14 @@ export const createGeneralSlice = (set) => ({
               nested: { ...state.nested, current_lavel: state.nested.current_lavel + 1 },
           }
      });
-    },
-    
+     
+    },    
     ActivateModal: function(){
-     set( function(state){
+      set( function(state){
            return { 
             active_modal: 1,
           }
-     });
+      });
     },
     
     CloseModal: function(value){ 
@@ -49,29 +56,29 @@ export const createGeneralSlice = (set) => ({
              active_modal: value,
            }
       });
-     },
+    },
      
-     setModalContent: function(content){
-          set( function(state){
+    setModalContent: function(content){
+          set( function(){
             return { 
               ModalContent: content,
            }
       });     
       
-     },
-     setModalHeading: function(content){
-            set( function(state){
+    },
+    setModalHeading: function(content){
+            set( function(){
               return { 
                 ModalHeading: content,
              }
         }); 
-     },
-     setCurrentLavel: function(value){
-      set( function(state){
-        return { 
-          current_lavel: value,
-       }
-  }); 
-}
+    },
+    setCurrentLavel: function(value){
+            set( function(){
+              return { 
+                current_lavel: value,
+             }
+        }); 
+    }
     
-  })
+})

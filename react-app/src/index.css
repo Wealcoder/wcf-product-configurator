@@ -149,10 +149,10 @@ button:focus-visible {
   margin-bottom: 30px ;
 }
 .wcf-pml-content-area{
-
   display: flex;
   justify-content: right;
   gap: 30px;
+  flex-direction: column;
 
 }
 .wcf-product-samples input:checked ~ .wcf-product-samples .column-items {

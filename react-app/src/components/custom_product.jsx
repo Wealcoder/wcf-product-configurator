@@ -40,6 +40,13 @@ export class Wcf_Custom_Product {
       }
     }
   }
+  
+  update(key,value){
+    let search_data = this.find(key);
+    if( search_data ){
+      search_data.data = value;  
+    }        
+  }
 
   remove(targetKey) {
     // if the Tree is empty, throw an error
